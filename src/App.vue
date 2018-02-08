@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <headers></headers>
+    <leftNav></leftNav>
     <main>
       
     </main>
@@ -21,4 +21,9 @@ export default {
 
 <style>
   @import "./components/static/css/main.css";
+  @import "./components/static/css/font-awesome.min.css";
+  #app{
+      width:100%;
+      height:100%;
+  }
 </style>
