@@ -8,6 +8,10 @@ export default new Router({
   mode: 'history',
   routes: [
     {
+      path : '/',
+      redirect : '/accounts'
+    },
+    {
       path : '/accounts',
       name : 'accounts',
       component : Accounts

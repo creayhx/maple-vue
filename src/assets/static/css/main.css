@@ -85,3 +85,61 @@ html,body{
 .text-center{
     text-align:center;
 }
+
+.table-list{
+    width:100%;
+    border:1px solid #DFE6EC;
+}
+.table-ml{
+    width:97%;
+    margin-left:2.5%;
+}
+.table-list thead tr{
+    background-color:#EEF1F6;
+    font-size:13px;
+}
+.table-list tbody tr:hover{
+    background-color:#EEF1F6;
+}
+.table-list tbody tr td,.table-list thead tr th{
+    min-width:70px;
+    padding: 3px 5px;
+    border-right:1px solid #DFE6EC;
+    border-bottom:1px solid #DFE6EC;
+}
+.table-list thead tr th:first-child,.table-list tbody tr td:first-child{
+    width:100px;
+}
+.table-list thead tr th:first-child i, .table-list tbody tr td:first-child i{
+    font-size:20px;
+    color:#20A0FF;
+}
+.fl-title{
+    width: 98%;
+    height: 40px;
+    line-height: 40px;
+    color: #1F2D3D;
+    border-bottom: 1px solid #ECF0F1;
+    padding-left: 20px;
+    margin:0 auto;
+    position: relative;
+    font-size: 15px;
+}
+.fl-title:after{
+    content: " ";
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #38BEFE;
+}
+.fl-panel{
+    width:98%;
+    height:100%;
+    margin:0 auto;
+}
+.fl-content{
+    width:98%;
+    margin:0 auto;
+}

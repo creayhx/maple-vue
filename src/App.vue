@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <leftNav></leftNav>
-    <main>
-      
-    </main>
+    <headers></headers>
+    <div class="main">
+        <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -20,10 +21,15 @@ export default {
 </script>
 
 <style>
-  @import "./components/static/css/main.css";
-  @import "./components/static/css/font-awesome.min.css";
+  @import "./assets/static/css/main.css";
+  @import "./assets/static/css/font-awesome.min.css";
   #app{
       width:100%;
       height:100%;
+  }
+  .main{
+    float:left;
+    width:85%;
+    height:90%;
   }
 </style>

@@ -1,29 +1,32 @@
 <template>
   <div class="header">
-      <h3 class="title">Admin</h3>
+      <p class="title">{{this.$store.state.menuName}}</p>
   </div>
 </template>
 
 <script>
-  export default {
-
+import store from '@/vuex/store';
+export default {
+    store
 };
 </script>
 
 <style scoped>
     .header{
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        height:50px;
-        background-color: #2A3542;
+        float:left;
+        width:85%;
+        height:10%;
+        position:relative;
+        background-color: #F5F5F5;
+        border-bottom: 1px solid #EEEEEE;
     }
     .title{
-        margin: 0;
-        padding: 0;
-        line-height:50px;
-        margin-left:20px;
-        color:#ccc;
+        position: absolute;
+        top: 50%;
+        font-size: 14px;
+        margin-left:40px;
+        color:#666;
+        transform: translate(-50%,0);
+        -webkit-transform: translate(-50%,0);
     }
 </style>
