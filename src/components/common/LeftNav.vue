@@ -4,12 +4,12 @@
         <img src="">
     </div>
      <ul>
-       <li class="title" v-for="(n,i) in menuList" :style="{backgroundColor:n.bgc}" @click="toggleMenu(n,$event)">
+       <li class="title" v-for="(n,i) in menuList" :class="n.active && 'active'" @click="toggleMenu(n,i)">
           <template v-if="(n.children && n.children.length)">
               <i v-if="n.icon" :class="n.icon"></i> {{n.name}}
               <div class="child" v-if="n.children && n.children.length" :style="{height : n.height}">
                   <ol>
-                    <li v-for="(val,key) in n.children" >
+                    <li v-for="(val,key) in n.children" :class="val.active && 'active'" @click="toggleChild(i,key)">
                       <router-link :to="val.path">{{val.name}}</router-link>
                     </li>
                   </ol>
@@ -30,48 +30,53 @@
   export default {
     data(){
       return{
+          now : 0,
           menuList : [
             {
-              id : 1,
               name : '首页',
               path : '/',
               icon : 'fa fa-home',
-              active : 'active'
+              active : true
             },
             {
-              id : 2,
               name : '管理',
               icon : 'fa fa-user-o',
               children : [
                 {
-                  id : 1,
                   name : '账号管理',
-                  path : '/accounts'
+                  path : '/accounts',
+                  active : false
                 }
               ],
-              open:false,
-              height:0,
-              bgc:''
+              active:true,
+              height:0
             }
           ]
       }
     },
     methods:{
-      toggleMenu(n,e){
-        if(e.target.className.indexOf('title') > -1 && n.children){
-          let index = 0;
-          let status = false;
-          for(let i = 0; i < this.menuList.length; i++ ){
-            if(n.id == this.menuList[i].id){
-              index = i;
-              status = this.menuList[i].open;
-              break;
-            };
+      toggleMenu(n,i){
+        let status = this.menuList[i].active; // 当前菜单状态
+        let now = this.menuList[this.now];
+        if(this.now != i){ //判断是否点击了自身
+          now.active = false;
+          now.height && (now.height = '0px');
+          if(now.children){
+            now.children.forEach( (n) =>{ 
+              n.active = false;
+            });
           };
-          this.$set(this.menuList[index],'height', status ? 0 :  n.children.length * 40 + 'px');
-          this.$set(this.menuList[index],'bgc', status ? 'none' : '#434A50');
-          this.$set(this.menuList[index],'open', !this.menuList[index].open);
+          this.now = i;
+          this.$set(this.menuList[i],'active',true);
+          n.children && this.$set(this.menuList[i],'height', n.children.length * 40 + 'px');
         };
+      },
+      toggleChild(pIndex, cIndex){
+        let parent = this.menuList[pIndex].children;
+        parent.forEach( (n)=>{
+          n.active = false;
+        });
+        this.$set(parent[cIndex],'active',true);
       }
     }
   };
@@ -103,6 +108,9 @@
   overflow: hidden;
   
 }
+.nav ul li.active {
+  background-color: #434a50;
+}
 .nav ul li:hover {
   background-color: #434a50;
 }
@@ -118,6 +126,9 @@
   width: 100%;
   height: 100%;
   color: #ccc;
+}
+.nav ol li.active a {
+  color:#FFD04B;
 }
 .nav .child {
   -webkit-transition: height 0.3s linear;
