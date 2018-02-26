@@ -23,6 +23,7 @@ export default {
 <style>
   @import "./assets/static/css/main.css";
   @import "./assets/static/css/font-awesome.min.css";
+  @import "./assets/static/css/pagination.css";
   #app{
       width:100%;
       height:100%;

@@ -60,6 +60,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <m-pagiantion :total="15" :goto="goto"></m-pagiantion>
             </div>
         </div>
     </div>
@@ -67,6 +68,7 @@
 
 <script>
     import axios from 'axios';
+    import Pagination from '../common/Pagination.vue';
     export default {
         data(){
             return {
@@ -76,16 +78,27 @@
                     banned : '',
                     name : '',
                     curPage : 1
-                }
+                },
+                pageSize : 0
             }
         },
         mounted(){
             this.scanf();
         },
+        components : {
+            'm-pagiantion': Pagination
+        },
         methods:{
-            scanf(){
+            goto(cur){
+                this.scanf(cur);
+            },
+            scanf(cur){
+                if(cur){
+                    this.search.curPage = cur;
+                };
                 axios.post('/user/search', this.search).then((resp)=>{
                     this.userList = resp.data.data.list;
+                    this.pageSize = resp.data.data.pageSize;
                 }).catch((err)=>{
                     console.log(err);
                 });
