@@ -3,7 +3,7 @@
         <div class="search">
             <label class="control-label">
                 <span>帐号状态:</span>
-                <select class="form-control" name="loggedin">
+                <select class="form-control" name="loggedin" v-model="search.loggedin">
                     <option value="">全部</option>
                     <option value="1">在线</option>
                     <option value="0">下线</option>
@@ -11,13 +11,13 @@
             </label>
             <label class="control-label">
                 <span>帐号状态:</span>
-                <select class="form-control" name="banned">
+                <select class="form-control" name="banned" v-model="search.banned">
                     <option value="">全部</option>
                     <option value="0">正常</option>
                     <option value="1">封号</option>
                 </select>
             </label>
-            <input class="form-control" type="text" name="name" placeholder="请输入帐号名称">
+            <input class="form-control" type="text" name="name" placeholder="请输入帐号名称" v-model="search.name">
             <span class="btn btn-primary search-btn"><i class="fa fa-search"></i>搜索</span>
             <span class="btn btn-primary add-btn"><i class="fa fa-address-card-o"></i>新增</span>
             <span class="btn btn-primary batch-deletion"><i class="fa fa-trash-o"></i>批量删除</span>
@@ -66,17 +66,30 @@
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
         data(){
             return {
-                userList : []
+                userList : [],
+                search : {
+                    loggedin : '',
+                    banned : '',
+                    name : '',
+                    curPage : 1
+                }
             }
         },
-        created(){
-            var resp = {"data":{"pageSize":10,"list":[{"id":3,"name":"admin","loggedin":1,"banned":0,"banreason":"","paypalNX":11311161,"mPoints":10001201,"money":9099999},{"id":4,"name":"creayh","loggedin":0,"banned":0,"banreason":"","paypalNX":null,"mPoints":null,"money":0},{"id":122,"name":"asdasd","loggedin":0,"banned":0,"banreason":"","paypalNX":null,"mPoints":null,"money":0},{"id":123,"name":"asdasd1","loggedin":0,"banned":0,"banreason":null,"paypalNX":null,"mPoints":null,"money":0},{"id":125,"name":"asdasd2","loggedin":0,"banned":0,"banreason":null,"paypalNX":null,"mPoints":null,"money":0},{"id":126,"name":"asdasd3","loggedin":0,"banned":0,"banreason":null,"paypalNX":null,"mPoints":null,"money":0},{"id":127,"name":"asdasd4","loggedin":0,"banned":0,"banreason":null,"paypalNX":null,"mPoints":null,"money":0},{"id":128,"name":"asdasd6","loggedin":0,"banned":0,"banreason":null,"paypalNX":null,"mPoints":null,"money":0},{"id":129,"name":"asdasd7","loggedin":0,"banned":0,"banreason":null,"paypalNX":null,"mPoints":null,"money":0},{"id":130,"name":"asdasd8","loggedin":0,"banned":0,"banreason":null,"paypalNX":null,"mPoints":null,"money":0}]},"msg":null,"ret":true};
-            this.userList = resp.data.list;
+        mounted(){
+            this.scanf();
         },
         methods:{
+            scanf(){
+                axios.post('/user/search', this.search).then((resp)=>{
+                    this.userList = resp.data.data.list;
+                }).catch((err)=>{
+                    console.log(err);
+                });
+            },
             modifyUser(){
                 
             },

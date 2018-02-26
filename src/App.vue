@@ -31,5 +31,6 @@ export default {
     float:left;
     width:85%;
     height:90%;
+    overflow:scroll;
   }
 </style>

@@ -11,7 +11,13 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "compression": "^1.7.2",
+    "cookie-parser": "^1.4.3",
+    "crypto": "^1.0.1",
     "element-ui": "^2.1.0",
+    "express-session": "^1.15.6",
+    "formidable": "^1.1.1",
+    "mysql": "^2.15.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
