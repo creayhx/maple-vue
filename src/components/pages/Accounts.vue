@@ -54,13 +54,13 @@
                             <td>{{item.mPoints}}</td>
                             <td>{{item.money}}</td>
                             <td>
-                                <span class="btn btn-primary modify-btn" @click="modifyUser(item)">修改</span></span>
-                                <span class="btn btn-primary modify-btn" @click="ban(item)">封号</span>
+                                <span class="btn btn-primary modify-btn" @click="modifyUser(item.id)">修改</span></span>
+                                <span class="btn btn-primary modify-btn" @click="ban(item.id)">封号</span>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <m-pagiantion :total="15" :goto="goto"></m-pagiantion>
+                <m-pagiantion :cur="search.curPage" :total="pageSize" :goto="scanf"></m-pagiantion>
             </div>
         </div>
     </div>
@@ -69,6 +69,7 @@
 <script>
     import axios from 'axios';
     import Pagination from '../common/Pagination.vue';
+    import FormBox from '../common/formBox/FormBox.vue';
     export default {
         data(){
             return {
@@ -89,9 +90,6 @@
             'm-pagiantion': Pagination
         },
         methods:{
-            goto(cur){
-                this.scanf(cur);
-            },
             scanf(cur){
                 if(cur){
                     this.search.curPage = cur;
@@ -100,17 +98,73 @@
                     this.userList = resp.data.data.list;
                     this.pageSize = resp.data.data.pageSize;
                 }).catch((err)=>{
-                    this.$message({
-                        status : 'danger',
-                        msg : '获取数据错误'
-                    });
+                    // this.$message({
+                    //     tip : 0,
+                    //     msg : '获取数据失败!'
+                    // });
                 });
             },
-            modifyUser(){
-                
-            },
-            ban(){
 
+            modifyUser(id){
+                axios.get('/user/detail/' + id).then((resp)=>{
+                    this.$formBox({
+                        form : [
+                            {
+                             name : "账号",
+                             type : 'name',
+                            },
+                            {
+                             name : "生日",
+                             type : 'birthday'
+                            },
+                            {
+                             name : "GM等级",
+                             type : 'gm'
+                            },
+                            {
+                             name : "QQ",
+                             type : 'QQ'
+                            },
+                            {
+                             name : "邮箱",
+                             type : 'email'
+                            },
+                            {
+                             name : "点券",
+                             type : 'paypalNX'
+                            },
+                            {
+                             name : "抵用券",
+                             type : 'mPoints'
+                            },
+                            {
+                             name : "元宝",
+                             type : 'money'
+                            }
+                        ],
+                        data : resp.data.data,
+                        save(){
+                            axios.post('/user/modify',this.data).then( resp =>{
+                                if(resp.data.ret){
+                                    this.close();
+                                    this.$message(1,'修改成功')
+                                }else{
+                                    this.$message(0,'修改失败')
+                                }
+                            }).catch( err =>{
+                                this.$message(0,'修改失败')
+                            })
+                        }
+                    })
+                }).catch((err)=>{
+                    // this.$message({
+                    //     tip : 0,
+                    //     msg : '获取数据失败!'
+                    // });
+                });
+            },
+            ban(id){
+                console.log(id);
             }
         }
     };

@@ -17,14 +17,14 @@ export default {
         width:85%;
         height:50px;
         position:relative;
-        background-color: #545C64;
+        background-color: #EEEEEE;
     }
     .title{
         position: absolute;
         top: 50%;
         font-size: 14px;
         margin-left:20px;
-        color:#fff;
+        color:#666;
         transform: translate(-50%,0);
         -webkit-transform: translateY(-50%);
     }

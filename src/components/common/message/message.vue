@@ -1,6 +1,6 @@
 <template>
 	<transition name="fade" mode="out-in">
-		<div class="message" :class="status" v-if="show">
+		<div class="message" :class="tipClass" v-if="show">
 			<i class="fa fa-info-circle"></i>
 			<p>{{msg}}</p>
 		</div>
@@ -12,10 +12,27 @@
 		name : 'messageBox',
 		data(){
 			return {
-				status : '',
-				show : true,
+				tip : 9,
+				show : false,
 				msg : '',
 				time : 2000
+			}
+		},
+		computed : {
+			tipClass(){
+				let cls = '';
+				switch(this.tip){
+					case 0 :
+						cls = 'danger' 
+					break;
+					case 1 :
+						cls = 'success' 
+					break;
+					case 2 :
+						cls = 'warning' 
+					break;
+				}
+				return cls
 			}
 		},
 		methods:{
@@ -26,6 +43,7 @@
 			}
 		},
 		mounted(){
+			this.show = true;
 			this.close();
 		}
 	};

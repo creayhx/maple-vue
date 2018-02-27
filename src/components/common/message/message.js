@@ -1,20 +1,26 @@
 import Vue from 'vue';
 import Message from './message.vue';
-Message.installMessage = (opt)=>{
+Message.installMessage = (tip, opt)=>{
+	let option = {};
 	if(opt){
 		if(typeof opt === 'string' || typeof opt === 'number'){
-			opt = {
-				message : opt
+			option = {
+				tip : tip ? tip : '',
+				msg : opt
 			};
+		}else{
+			tip && (opt.tip = tip);
+			option = tip;
 		};
 	}else{
-		opt = {
+		option = {
+			tip : tip ? tip : '',
 			message : ''
 		};
 	};
 	let message = Vue.extend(Message);
 	let component = new message({
-		data : opt
+		data : option
 	}).$mount();
 	document.body.appendChild(component.$el);
 };
