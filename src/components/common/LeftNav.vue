@@ -110,32 +110,31 @@
       }
     },
     methods:{
-      toggleMenu(n,i){
-        let status = this.menuList[i].active; // 当前菜单状态
-        let now = this.menuList[this.now];
-        if(this.now != i){ //判断是否点击了自身
-          now.active = false;
-          now.height && (now.height = '0px');
-          if(now.children){
-            now.children.forEach( (n) => n.active = false);
-          };
-          this.now = i;
-          this.$set(this.menuList[i],'active',true);
-          n.children && this.$set(this.menuList[i],'height', n.children.length * 40 + 'px');
-          this.$store.commit('replace',n.name);
-        };
-      },
-      toggleChild(pIndex, cIndex, n){
-        let parent = this.menuList[pIndex].children;
-        parent.forEach( (n)=>{
-          n.active = false;
-        });
-        this.$set(parent[cIndex],'active',true);
-        this.$store.commit('replace', n.name);
-      }
+        toggleMenu(n,i){
+            let status = this.menuList[i].active; // 当前菜单状态
+            let now = this.menuList[this.now];
+            if(this.now != i){ //判断是否点击了自身
+                now.active = false;
+                now.height && (now.height = '0px');
+                if(now.children){
+                    now.children.forEach( (n) => n.active = false);
+                };
+                this.now = i;
+                this.$set(this.menuList[i],'active',true);
+                n.children && this.$set(this.menuList[i],'height', n.children.length * 40 + 'px');
+                this.$store.commit('replace',n.name);
+            };
+        },
+        toggleChild(pIndex, cIndex, n){
+            let parent = this.menuList[pIndex].children;
+            parent.forEach( (n)=>{
+              n.active = false;
+            });
+            this.$set(parent[cIndex],'active',true);
+            this.$store.commit('replace', n.name);
+        }
     },
     store
-
   };
 </script>
 

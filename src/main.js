@@ -3,9 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
+import InstallMessage from './components/common/message/message';
 Vue.config.productionTip = false
 
+Vue.use(InstallMessage);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

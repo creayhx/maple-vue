@@ -15,18 +15,17 @@ export default {
     .header{
         float:left;
         width:85%;
-        height:10%;
+        height:50px;
         position:relative;
-        background-color: #F5F5F5;
-        border-bottom: 1px solid #EEEEEE;
+        background-color: #545C64;
     }
     .title{
         position: absolute;
         top: 50%;
         font-size: 14px;
-        margin-left:40px;
-        color:#666;
+        margin-left:20px;
+        color:#fff;
         transform: translate(-50%,0);
-        -webkit-transform: translate(-50%,0);
+        -webkit-transform: translateY(-50%);
     }
 </style>

@@ -18,7 +18,7 @@
                 </select>
             </label>
             <input class="form-control" type="text" name="name" placeholder="请输入帐号名称" v-model="search.name">
-            <span class="btn btn-primary search-btn"><i class="fa fa-search"></i>搜索</span>
+            <span class="btn btn-primary search-btn" @click="scanf(1)"><i class="fa fa-search"></i>搜索</span>
             <span class="btn btn-primary add-btn"><i class="fa fa-address-card-o"></i>新增</span>
             <span class="btn btn-primary batch-deletion"><i class="fa fa-trash-o"></i>批量删除</span>
         </div>
@@ -100,7 +100,10 @@
                     this.userList = resp.data.data.list;
                     this.pageSize = resp.data.data.pageSize;
                 }).catch((err)=>{
-                    console.log(err);
+                    this.$message({
+                        status : 'danger',
+                        msg : '获取数据错误'
+                    });
                 });
             },
             modifyUser(){
